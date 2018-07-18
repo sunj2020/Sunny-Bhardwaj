@@ -1,0 +1,15 @@
+---
+- hosts: 10.194.69.251 
+  remote_user: test1000
+  become: yes
+  tasks:
+   - name: install httpd package
+     yum:  name=httpd state=installed
+     when: ansible_os_family == 'Redhat'
+   - name: install  apache2 package
+     apt:  name=httpd state=installed
+     when: ansible_os_family == 'Debian'
+   - name: copy index.html
+     copy: src=index.html dest=/var/www/html
+   - name: start httpd service
+     service: name=httpd state=started

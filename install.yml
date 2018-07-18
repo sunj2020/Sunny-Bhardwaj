@@ -1,0 +1,8 @@
+---
+   - name: install httpd package
+     yum:  name=httpd state=installed
+   - name: copy index.html
+     copy: src=index.html dest=/var/www/html/index.html
+     notify: start httpd service
+   - name: start ht service
+     service: name=httpd state=started

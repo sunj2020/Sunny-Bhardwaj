@@ -1,0 +1,18 @@
+---
+- hosts: 10.194.69.251 
+  remote_user: test1000
+  become: yes
+  gather_facts: yes
+  tasks:
+   - name: remove old version of tomcat
+     file: path=/usr/local/tomcat state=absent
+   - name: download tomcat
+     get_url: url=http://mirror.cogentco.com/pub/apache/tomcat/tomcat-7/v7.0.88/bin/apache-tomcat-7.0.88.tar.gz dest=/tmp
+   - name: copy tomcat folder
+     command: mkdir /usr/local/tomcat
+   - name: extract archive
+     unarchive: src=/tmp/apache-tomcat-7.0.88.tar.gz dest=/usr/local/tomcat copy=no
+#   - name: create tomcat users
+#     copy: src=/home/user1/tomcat-users.xml dest=/usr/local/tomcat/conf/
+   - name: start tomcat
+     command: nohup /usr/local/tomcat/apache-tomcat-7.0.88/bin/startup.sh &

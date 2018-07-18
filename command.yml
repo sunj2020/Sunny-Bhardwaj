@@ -1,0 +1,13 @@
+---
+- hosts: 10.194.69.251 
+  remote_user: test1000
+  become: yes
+  tasks:
+   - name: Installing httpd package
+     command: yum install -y httpd
+   - name: copy index.html
+     shell: echo "hello" > /var/www/html/index.html
+   - name: start httpd service
+     raw: service httpd stop
+   - name: execute a script
+     script: ./xyz.sh

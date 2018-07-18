@@ -1,0 +1,11 @@
+---
+- hosts: 10.194.69.251 
+  remote_user: test1000
+  become: yes
+  tasks:
+   - name: install httpd package
+     yum:  name={{item}} state=installed
+     with_items:
+       - httpd
+       - telnet
+       - curl

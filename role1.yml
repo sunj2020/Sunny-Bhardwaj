@@ -1,0 +1,6 @@
+---
+- hosts: 10.194.69.251 
+  remote_user: test1000
+  become: yes
+  roles:
+   - webservers

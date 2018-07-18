@@ -1,0 +1,7 @@
+---
+- hosts: 10.194.69.251 
+  remote_user: test1000
+  become: yes
+  tasks:
+   - name: copy new index.html
+     template: src=index.html.j2 dest=/tmp/index.html
